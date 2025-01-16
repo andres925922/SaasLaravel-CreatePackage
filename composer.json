@@ -1,0 +1,17 @@
+{
+    "name": "aconvertini/greetr",
+    "description": "Just a testing package",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Aconvertini\\Greetr\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Andres Convertini",
+            "email": "andres.convertini@hotmail.com"
+        }
+    ],
+    "require": {}
+}
