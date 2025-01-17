@@ -3,14 +3,16 @@
 namespace aconvertini\Greetr\Tests;
 
 use PHPUnit\Framework\TestCase;
-use aconvertini\Greetr\Greetr;
+use Illuminate\Support\Facades\Request;
+use aconvertini\Greetr\Http\Controllers\GreetController;
 
 
 class InitialTest extends TestCase
 {
     public function testGreet()
     {
-        $greetr = new Greetr();
-        $this->assertEquals('Hi Andrea! How are you doing today?', $greetr->greet('Andrea'));
+        $controller = new GreetController();
+        $response = $controller->index(new Request(), 'aconvertini');
+        $this->assertEquals('Hi aconvertini! How are you doing today?', $response);
     }
 }

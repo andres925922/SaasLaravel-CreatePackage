@@ -2,6 +2,7 @@
     "name": "aconvertini/greetr",
     "description": "Just a testing package",
     "license": "MIT",
+    "minimum-stability": "dev",
     "autoload": {
         "psr-4": {
             "aconvertini\\Greetr\\": "src/"
@@ -20,5 +21,9 @@
     ],
     "require-dev": {
         "phpunit/phpunit": "^10.0.0"
+    },
+    "require": {
+        "php": ">=8.0",
+        "illuminate/support": "^8.0|^9.0|^10.0"
     }
 }
