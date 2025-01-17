@@ -8,7 +8,7 @@ class GreetMiddleware
 {
     public function handle($request, Closure $next)
     {
-        if (!config('package.enabled')) {
+        if (!config('greet.enabled')) {
             return response('Package is disabled', 403);
         }
 

@@ -6,6 +6,8 @@ use Illuminate\Support\ServiceProvider;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Facades\Log;
 
+use aconvertini\Greetr\Services\GreetService;
+
 class GreetServiceProvider extends ServiceProvider
 {
     public function boot()
@@ -29,6 +31,9 @@ class GreetServiceProvider extends ServiceProvider
         $this->mergeConfigFrom(
             __DIR__ . '/../../config/greet.php', 'greet'
         );
+
+        // Register services
+        $this->registerServices();
     }
 
     private function setupConfig(): void
@@ -53,5 +58,12 @@ class GreetServiceProvider extends ServiceProvider
                 __DIR__.'/../../migrations' => database_path('migrations'),
             ], 'migrations');
         }
+    }
+
+    public function registerServices()
+    {
+        $this->app->bind('greetr', function ($app) {
+            return new GreetService();
+        });
     }
 }
