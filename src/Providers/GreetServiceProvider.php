@@ -5,6 +5,7 @@ namespace aconvertini\Greetr\Providers;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Route;
 
 use aconvertini\Greetr\Services\GreetService;
 
@@ -22,6 +23,9 @@ class GreetServiceProvider extends ServiceProvider
         // $this->loadRoutesFrom(__DIR__ . '/../../routes/api.php');
         
         // Register middleware
+        Route::middlewareGroup('greetMiddleware', [
+            \aconvertini\Greetr\Http\Middleware\GreetMiddleware::class
+        ]);
         $this->app['router']->aliasMiddleware('greetMiddleware', \aconvertini\Greetr\Http\Middleware\GreetMiddleware::class);
     }
 
@@ -34,6 +38,7 @@ class GreetServiceProvider extends ServiceProvider
 
         // Register services
         $this->registerServices();
+        $this->registerRoutes();
     }
 
     private function setupConfig(): void
@@ -64,6 +69,13 @@ class GreetServiceProvider extends ServiceProvider
     {
         $this->app->bind('greetr', function ($app) {
             return new GreetService();
+        });
+    }
+
+    protected function registerRoutes()
+    {
+        Route::group([], function () {
+            $this->loadRoutesFrom(__DIR__.'/../../routes/api.php');
         });
     }
 }
